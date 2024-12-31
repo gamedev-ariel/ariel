@@ -25,6 +25,17 @@ public class CoffeeBoost : MonoBehaviour
         {
             coffeeIcon.SetActive(false);
         }
+
+        // **%%%שחזור מצב כוס הקפה מהסצנה הקודמת%%%**: 
+        if (PlayerSpawnManager.Instance.TryGetCoffeeState(out bool coffeeState, out float boostDuration))
+        {
+            hasCoffee = coffeeState;
+            if (hasCoffee && coffeeIcon != null)
+            {
+                coffeeIcon.SetActive(true);
+            }
+            this.boostDuration = boostDuration;  // אם הבוסט פעיל, נשחזר את משך הזמן שלו
+        }
     }
 
     private void Update()
@@ -57,6 +68,9 @@ public class CoffeeBoost : MonoBehaviour
             {
                 coffeeIcon.SetActive(true); // icon pop
             }
+
+            // **%%%שמירת מצב כוס הקפה%%%**: נשמור את מצב כוס הקפה בסצנה
+            PlayerSpawnManager.Instance.SetCoffeeState(true, boostDuration);
         }
     }
 
@@ -77,6 +91,9 @@ public class CoffeeBoost : MonoBehaviour
 
         // Reset player speed after the boost ends
         Invoke("EndBoost", boostDuration);
+
+        // **%%%שמירת מצב כוס הקפה לאחר השימוש: הגדרת מצב הקפה%%%**
+        PlayerSpawnManager.Instance.SetCoffeeState(false);  // הגדר כוס קפה כלא פעילה
     }
 
     private void EndBoost()
