@@ -8,6 +8,7 @@ public class PlayerSpawnManager : MonoBehaviour
     private bool hasSpawnPosition = false;
 
     private bool hasCoffee = false;
+    //private bool BoostActive = false;
     private float coffeeBoostDuration = 0f;
 
     private void Awake()
@@ -42,6 +43,7 @@ public class PlayerSpawnManager : MonoBehaviour
     public void SetCoffeeState(bool coffeeState, float boostDuration = 0f)
     {
         hasCoffee = coffeeState;
+        //BoostActive = isBoostActive;
         coffeeBoostDuration = boostDuration;
     }
 
@@ -49,8 +51,9 @@ public class PlayerSpawnManager : MonoBehaviour
     {
         coffeeState = hasCoffee;
         boostDuration = coffeeBoostDuration;
+        //isBoostActive = BoostActive;
         bool hadCoffeeState = hasCoffee;
         //hasCoffee = false; // Reset after using the state
-        return hadCoffeeState;
+        return coffeeState;
     }
 }

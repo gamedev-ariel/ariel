@@ -35,6 +35,10 @@ public class CoffeeBoost : MonoBehaviour
                 coffeeIcon.SetActive(true);
             }
             this.boostDuration = boostDuration;  // אם הבוסט פעיל, נשחזר את משך הזמן שלו
+            //if (isBoostActive)
+            //{
+            //    UseCoffee();
+            //}
         }
     }
 
@@ -88,6 +92,7 @@ public class CoffeeBoost : MonoBehaviour
 
         // boost is active
         isBoostActive = true;
+        //PlayerSpawnManager.Instance.SetCoffeeState(false, boostDuration, isBoostActive);
 
         // Reset player speed after the boost ends
         Invoke("EndBoost", boostDuration);
